@@ -1,44 +1,38 @@
-name: CI - Cicd
+```yaml
+name: CI - CI/CD
 
-  on:
-  workflow_dispatch:
+on:
   push:
     branches: ["master"]
+  workflow_dispatch:
 
-  permission:
+permissions:
   contents: read
 
-  env:
+env:
   DOTNET_VERSION: "10.0.x"
   SOLUTION_PATH: "CICD-Template.slnx"
 
-  jobs:
-  Build-and-Test:
-  name: Build And Test
-  runs-on: ubuntu-latest
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
 
-  steps:
-  - name: Get Code
-  uses: actions/checkout@v7
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
 
-  - name: Setup .NET
-    uses: actions/setup-dotnet@v5
-    with:
-      dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-  - name: Restore
-    run: dotnet restore ${{ env.SOLUTION_PATH }}
+      - name: Restore
+        run: dotnet restore ${{ env.SOLUTION_PATH }}
 
-  - name: Build
-    run: dotnet build ${{ env.SOLUTION_PATH }}
-     --no-restore 
-     --configuration Release
+      - name: Build
+        run: dotnet build ${{ env.SOLUTION_PATH }} --no-restore --configuration Release
 
-  - name: Test
-  run: dotnet test ${{ env.SOLUTION_PATH }} 
-   --no-build 
-   --configuration Release 
-   --no-restore
-   --verbosity normal
-
-
+      - name: Test
+        run: dotnet test ${{ env.SOLUTION_PATH }} --no-build --configuration Release --no-restore --verbosity normal
+```

@@ -5,14 +5,14 @@ on:
   push:
     branches: ["master"]
 
-permission:
+  permission:
   contents: read
 
-env:
+  env:
   DOTNET_VERSION: "10.0.x"
   SOLUTION_PATH: "CICD-Template.slnx"
 
-jobs:
+  jobs:
   Build-and-Test:
   name: Build And Test
   runs-on: ubuntu-latest

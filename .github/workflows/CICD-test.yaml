@@ -18,23 +18,23 @@ jobs:
   runs-on: ubuntu-latest
 
 steps:
-- name: Get Code
+  - name: Get Code
   uses: actions/checkout@v7
 
--name: Setup .NET
-  uses: actions/setup-dotnet@v5
-  with:
-     dotnet-version: ${{ env.DOTNET_VERSION }}
+  - name: Setup .NET
+    uses: actions/setup-dotnet@v5
+    with:
+      dotnet-version: ${{ env.DOTNET_VERSION }}
 
--name: Restore
-  run: dotnet restore ${{ env.SOLUTION_PATH }}
+  - name: Restore
+    run: dotnet restore ${{ env.SOLUTION_PATH }}
 
--name: Build
-  run: dotnet build ${{ env.SOLUTION_PATH }}
-   --no-restore 
-   --configuration Release
+  - name: Build
+    run: dotnet build ${{ env.SOLUTION_PATH }}
+     --no-restore 
+     --configuration Release
 
--name: Test
+  - name: Test
   run: dotnet test ${{ env.SOLUTION_PATH }} 
    --no-build 
    --configuration Release 

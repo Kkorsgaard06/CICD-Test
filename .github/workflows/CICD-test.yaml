@@ -13,7 +13,8 @@ env:
   SOLUTION_PATH: "CICD-Template.slnx"
 
 jobs:
-  name: Build-and-Test
+  Build-and-Test:
+  name: Build And Test
   runs-on: ubuntu-latest
 
 steps:
